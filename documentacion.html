@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Fundamentos de la computacion. Equipo 8</title>
+  </head>
+  <body>
+    <h1>Calcular si dos expresiones regulares son equivalentes</h1>
+    <article>
+        <section>
+            <ol>
+                <li><a href="#justificacion">Justificacion</a></li>
+                <li><a href="#descripcion">Descripcion del Proyecto</a></li>
+                <li><a href="#manual">Manual de Usuario</a></li>
+            </ol>
+            <h2 id="justificacion"> Justificacion</h2>
+            <p align="justify">
+                &nbsp;&nbsp;&nbsp;Decidimos elegir el ejercicio numero 5: Programa que recibe dos expresiones regulares y produce “SÍ” si las expresiones son equivalentes, “NO” en caso contrario.
+                La razón por la que se eligió esta opción fue por dos razones: La primera fue por que no queríamos complicar como leer los datos de entrada, así que una expresión
+                regular significaba una entrada fácil en lugar de elegir una gramática o un autómata que por obvias razones es más difícil de procesar, de la misma manera tampoco
+                queríamos tener que hacer más trabajo presentando un autómata como salida, por esas dos razones creímos que la mejor elección era elegir la opción 5, por que solo
+                teníamos que pedir las dos expresiones regulares como entrada y al final solo teníamos que mostrar las palabras "SI" o "NO", dependiendo si las expresiones eran o no
+
+                equivalentes.
+            </p>
+
+            <h2 id="descripcion"> Descripcion del Proyecto</h2>
+            <p align="justify">
+                &nbsp;&nbsp;&nbsp;El proyecto es una página web creada en combinación con html y javascript, la cual tiene como Titulo: Calcular si dos expresiones regulares son equivalentes, ademas cuenta con dos cajas de texto en las cual el usuario tiene que introducir las expresiones regulares, una vez que las expresiones son introducidas, se tiene la opción de "Calcular Equivalencia" con el respectivo botón o se puede acceder a esta documentación por medio del botón de "Ver Documentación". Cuando el botón de Calcular Equivalencia es presionado, una función que toma las dos expresiones regulares es llamada, dicha función convierte las expresiones regulares en un par de árboles que tienen como padres a los operadores y como hijos a los elementos del alfabeto, una vez que el árbol es construido, el siguiente paso es convertir los arboles en sus respectivos autómatas equivalentes, así que por medio del llamado de otras funciones, convertimos los arboles en autómatas finitos no deterministas que se presentan por medio de una matriz n x 3 , donde tenemos en la primer columna los estados de donde se inicia la transición, en la segunda columna, el elemento del alfabeto que va a transicionar y en la tercer columna, al estado en el que se finaliza la transición. Después dichos autómatas finitos no deterministas se convierten a autómatas finitos deterministas, para al final tener dos autómatas finitos deterministas que podemos comparar para buscar, checando cada estado en los dos autómatas para buscar compatibilidad, si en algún momento detectamos una incompatibilidad el sistema lanzara una ventana pop up anunciando que los dos autómatas no son equivalentes en caso contrario si el autómata analiza todos los estados y no encuentra incompatibilidad, la ventana pop up lanzara un mensaje diciendo que Si son compatibles.
+            </p>
+
+            <h2 id="manual"> Manual del Usuario</h2>
+            <p>
+                Aqui va el Manual del usuario
+            </p>
+
+        </section>
+    </article>
+
+
+
+  </body>
+</html>

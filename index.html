@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Fundamentos de la computacion. Equipo 8</title>
+  </head>
+  <body>
+	<script src="conversor.js"></script>
+    <h1>Calcular si dos expresiones regulares son equivalentes</h1>
+    <form class="" action="index.html" method="post">
+      <br>
+      <br>
+      <label>Introduce la primer expresion regular &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="expresionA" name="expresionA" required=""></label>
+      <br>
+      <br>
+      <label>Introduce la segunda expresion regular &nbsp;&nbsp; <input type="text" id="expresionB" name="expresionB" required=""></label>
+      <br>
+      <br>
+      <input type="button" name="calcular" value="Calcular Equivalencia" onclick="compararExpresiones(document.getElementById('expresionA').value, document.getElementById('expresionB').value)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="documentacion" onclick="window.open('documentacion.html', '_blank'); return false;" value="Ver Documentacion">
+
+    </form>
+    <div>
+      <div id="automataFN1"></div>
+      <div id="automataFD1"></div>
+
+      <div id="automataFN2"></div>
+      <div id="automataFD2"></div>
+    </div>
+  </body>
+</html>
