@@ -521,14 +521,144 @@ function sonAutomatasNoEquivalentesRecursivo(estadosValidadosSet, estadoOrigen1,
     estadosValidadosSet.add(estado1+","+estado2)
     return false;
 }
-var automataFN1Global = new Automata();
-var automataFN2Global = new Automata();
-var automataFD1Global = new AutomataFD();
-var automataFD2Global = new AutomataFD();
+
 function compararExpresiones(expR1, expR2){
 	automatas = generarAutomatas(expR1, expR2);
 	console.log(automatas[0]);
 	console.log(automatas[1]);
-	var resultado = iniciarProcesoDeComparacionDeAutomatas(automatas[0], automatas[1]);	
-	window.alert(resultado);
+	//var resultado = iniciarProcesoDeComparacionDeAutomatas(automatas[0], automatas[1]);	
+
+	var automataFN1 = automatas[0];
+	var automataFN2 = automatas[1];
+
+	automataFN1.mapaDeTransiciones = crearMapaDeTransicionPorEstado(automataFN1);
+	var aceptaEpsilon = aceptaCadenaVacia(automataFN1);
+	var automataFD1 = convertirAutomataFNToAutomataFD(automataFN1);
+	if(aceptaEpsilon){
+		automataFD1.estados.set(automataFD1.inicio, true);
+	}
+	
+	automataFN2.mapaDeTransiciones = crearMapaDeTransicionPorEstado(automataFN2);
+	var aceptaEpsilon2 = aceptaCadenaVacia(automataFN2);
+	var automataFD2 = convertirAutomataFNToAutomataFD(automataFN2);
+	if(aceptaEpsilon2){
+		automataFD2.estados.set(automataFD2.inicio, true);
+	}
+	
+	console.log("AFDs");
+	console.log(automataFD1);
+	console.log(automataFD2);
+	
+	var noSonEquivalentes = sonAutomatasNoEquivalentes(automataFD1, automataFD2);
+	//return !noSonEquivalentes;
+	if(!noSonEquivalentes){
+		window.alert("Expresiones son equivalentes");
+	}
+	else {
+		window.alert("Expresiones NO son equivalentes");
+	}
+	
+	crearTablaDeResultados(!noSonEquivalentes, automataFN1, automataFN2, automataFD1, automataFD2, expR1, expR2);
+}
+
+function crearNodoTexto(texto) {
+	return document.createTextNode(texto);
+}
+
+function crearParrafoConTexto(texto){
+	var parrafo = document.createElement("p");
+	parrafo.appendChild(crearNodoTexto(texto));
+	return parrafo;
+}
+
+function crearSpan(texto){
+	var span = document.createElement("span");
+	span.appendChild(crearNodoTexto(texto));
+	span.appendChild(document.createElement("br"));
+	return span;
+}
+
+function crearContenidoParaAutomata(automata, titulo, tipoDeAutomata) {
+	var div = document.createElement("div");	
+	var estadoInicial;
+	var estadoFinal;
+	var estadosAutomata;
+	var estadosAceptacion;	
+
+	div.appendChild(crearParrafoConTexto(titulo));
+
+	if(tipoDeAutomata == "AFN"){
+		estadoInicial = automata.inicio.valor;
+		estadoFinal = automata.fin.valor;
+		estadosAutomataAux = "";		
+		estadosAutomata = "Estados: [ " + automata.estados.join(", ") + " ]";
+		estadosAceptacion = "Estados de Aceptacion: [ " + estadoFinal + " ]"; 
+	}
+	else {
+		estadoInicial = automata.inicio;
+		var estadosArray = [];
+		var estadosAceptacionArray = [];
+		automata.estados.forEach(function(aceptacion, estado) {
+			console.log(estado);
+			var estadoSinComas = estado.replaceAll(",", "");
+			estadosArray.push(estadoSinComas);
+			if(aceptacion){
+				estadosAceptacionArray.push(estadoSinComas);
+			}			
+		});
+		estadosAutomata = "Estados: [ " + estadosArray.join(", ") + " ]";
+		estadosAceptacion = "Estados de Aceptacion: [ " + estadosAceptacionArray.join(", ") + " ]"; 
+	}
+	div.appendChild(crearParrafoConTexto("Estado Inicial: " + estadoInicial));
+
+	var alfabetoString = "Alfabeto: [ " + automata.alfabeto.join(", ") + "]";	
+	div.appendChild(crearParrafoConTexto(alfabetoString));
+	div.appendChild(crearParrafoConTexto(estadosAutomata));
+	div.appendChild(crearParrafoConTexto(estadosAceptacion));
+
+	var divTransiciones = document.createElement("div");
+	divTransiciones.appendChild(crearParrafoConTexto("Transiciones"));
+	automata.mapaDeTransiciones.forEach(function(transicion, estado){
+		divTransiciones.appendChild(crearParrafoConTexto("De Estado: " + estado));
+		transicion.forEach(function(aEstado, simbolo){
+			divTransiciones.appendChild(crearParrafoConTexto("Con simbolo: " + simbolo + ", a estado: " + aEstado));
+		});
+	});
+	div.appendChild(divTransiciones);
+	return div;
+}
+
+function limpiarDivs() {	
+	var divToRemove = document.getElementById('automataFN1').firstChild;
+	if(divToRemove != null) {
+		document.getElementById('automataFN1').removeChild(divToRemove);
+		var divToRemove = document.getElementById('automataFN2').firstChild;
+		document.getElementById('automataFN2').removeChild(divToRemove);
+		var divToRemove = document.getElementById('automataFD1').firstChild;
+		document.getElementById('automataFD1').removeChild(divToRemove);
+		var divToRemove = document.getElementById('automataFD2').firstChild;
+		document.getElementById('automataFD2').removeChild(divToRemove);
+	}
+}
+
+function crearTablaDeResultados(sonEquivalentes, automataFN1, automataFN2, automataFD1, automataFD2, expR1, expR2){
+	
+	limpiarDivs();
+	var expresionesEquivalentesString = "";
+	if(sonEquivalentes){
+		expresionesEquivalentesString = "Expresiones son equivalentes";
+	}
+	else {
+		expresionesEquivalentesString = "Expresiones NO son equivalentes";
+	}
+	document.getElementById('resultadoDeValidacion').innerHTML = expresionesEquivalentesString;
+
+	var htmlDiv = crearContenidoParaAutomata(automataFN1, "AFN Para Expresion " + expR1, "AFN");
+	document.getElementById('automataFN1').appendChild(htmlDiv);
+	var htmlDiv = crearContenidoParaAutomata(automataFD1, "AFD Para Expresion " + expR1, "AFD");
+	document.getElementById('automataFD1').appendChild(htmlDiv);
+	var htmlDiv = crearContenidoParaAutomata(automataFN2, "AFN Para Expresion " + expR2, "AFN");
+	document.getElementById('automataFN2').appendChild(htmlDiv);
+	var htmlDiv = crearContenidoParaAutomata(automataFD2, "AFD Para Expresion " + expR2, "AFD");
+	document.getElementById('automataFD2').appendChild(htmlDiv);
 }
