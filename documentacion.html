@@ -16,23 +16,89 @@
             <h2 id="justificacion"> Justificacion</h2>
             <p align="justify">
                 &nbsp;&nbsp;&nbsp;Decidimos elegir el ejercicio numero 5: Programa que recibe dos expresiones regulares y produce “SÍ” si las expresiones son equivalentes, “NO” en caso contrario.
-                La razón por la que se eligió esta opción fue por dos razones: La primera fue por que no queríamos complicar como leer los datos de entrada, así que una expresión
-                regular significaba una entrada fácil en lugar de elegir una gramática o un autómata que por obvias razones es más difícil de procesar, de la misma manera tampoco
-                queríamos tener que hacer más trabajo presentando un autómata como salida, por esas dos razones creímos que la mejor elección era elegir la opción 5, por que solo
-                teníamos que pedir las dos expresiones regulares como entrada y al final solo teníamos que mostrar las palabras "SI" o "NO", dependiendo si las expresiones eran o no
-
-                equivalentes.
+                La razón por la que se eligió esta opción fue por que día a día en nuestra vida laboral nos encontramos con problemas que necesitan del uso de expresiones regex, a veces por la falta
+                de experiencia, creamos expresiones muy complicadas, cuando nos damos cuenta de eso, intentamos reducirlas, pero muchas veces no sabemos si nuestro resultado es equivalente o si en realidad
+                estamos creando una nueva expresión, por esa razón, creemos que un programa que nos ayude a identificar si dos expresiones regulares son equivalentes seria un buen punto de inicio para, quizás,
+                en un futuro poder desarrollar un programa más completo que nos ayude a comparar expresiones regex.
             </p>
 
             <h2 id="descripcion"> Descripcion del Proyecto</h2>
             <p align="justify">
-                &nbsp;&nbsp;&nbsp;El proyecto es una página web creada en combinación con html y javascript, la cual tiene como Titulo: Calcular si dos expresiones regulares son equivalentes, ademas cuenta con dos cajas de texto en las cual el usuario tiene que introducir las expresiones regulares, una vez que las expresiones son introducidas, se tiene la opción de "Calcular Equivalencia" con el respectivo botón o se puede acceder a esta documentación por medio del botón de "Ver Documentación". Cuando el botón de Calcular Equivalencia es presionado, una función que toma las dos expresiones regulares es llamada, dicha función convierte las expresiones regulares en un par de árboles que tienen como padres a los operadores y como hijos a los elementos del alfabeto, una vez que el árbol es construido, el siguiente paso es convertir los arboles en sus respectivos autómatas equivalentes, así que por medio del llamado de otras funciones, convertimos los arboles en autómatas finitos no deterministas que se presentan por medio de una matriz n x 3 , donde tenemos en la primer columna los estados de donde se inicia la transición, en la segunda columna, el elemento del alfabeto que va a transicionar y en la tercer columna, al estado en el que se finaliza la transición. Después dichos autómatas finitos no deterministas se convierten a autómatas finitos deterministas, para al final tener dos autómatas finitos deterministas que podemos comparar para buscar, checando cada estado en los dos autómatas para buscar compatibilidad, si en algún momento detectamos una incompatibilidad el sistema lanzara una ventana pop up anunciando que los dos autómatas no son equivalentes en caso contrario si el autómata analiza todos los estados y no encuentra incompatibilidad, la ventana pop up lanzara un mensaje diciendo que Si son compatibles.
+                &nbsp;&nbsp;&nbsp;El proyecto es una página web creada en combinación con html y javascript, la cual tiene como Titulo: Calcular si dos expresiones regulares son equivalentes, ademas cuenta con dos cajas de texto en las cual el usuario tiene que introducir las expresiones regulares, una vez que las expresiones son introducidas, se tiene la opción de "Calcular Equivalencia" con su respectivo botón, o se puede acceder a esta documentación por medio del botón de "Ver Documentación". Cuando el botón de Calcular Equivalencia es presionado, una función que toma las dos expresiones regulares es llamada, dicha función convierte las expresiones regulares en un par de árboles que tienen como padres a los operadores y como hijos a los elementos del alfabeto, una vez que el árbol es construido, el siguiente paso es convertir los arboles en sus respectivos autómatas equivalentes, así que por medio del llamado de otras funciones, convertimos los arboles en autómatas finitos no deterministas que se presentan por medio de una matriz n x 3 , donde tenemos en la primer columna los estados de donde se inicia la transición, en la segunda columna, el elemento del alfabeto que va a transicionar y en la tercer columna, al estado en el que se finaliza la transición. Después dichos autómatas finitos no deterministas se convierten a autómatas finitos deterministas, para al final tener dos autómatas finitos deterministas que podemos comparar para buscar, checando cada estado en los dos autómatas para buscar compatibilidad, si en algún momento detectamos una incompatibilidad el sistema lanzara una ventana emergente anunciando que los dos autómatas no son equivalentes en caso contrario si el autómata analiza todos los estados y no encuentra incompatibilidad, la ventana emergente lanzara un mensaje diciendo que Si son equivalentes.
             </p>
 
             <h2 id="manual"> Manual del Usuario</h2>
+
+                <li><a href="#archivo">Iniciar el Programa via Archivo html</a></li>
+                <li><a href="#navegador">Iniciar el Programa via navegador</a></li>
+                <li><a href="#equivalencia">Calcular equivalencia</a></li>
+                <li><a href="#ejemplos">Ejemplos y restricciones</a></li>
+                <li><a href="#documentacion">Ver Documentacion</a></li>
+
             <p>
-                Aqui va el Manual del usuario
+                <h3 id="archivo">Iniciar el Programa via Archivo html</h3>
+                <ol>
+                    <li>Ir a carpeta Equivalencia de expresiones</li>
+                    <li>Doble click en el archivo index.html</li>
+                    <li>La pagina se abrira en su navegador por default</li>
+                </ol>
             </p>
+
+            <p>
+                <h3 id="navegador">Iniciar el Programa via navegador</h3>
+              <ol>
+                <li>Abrir el navegador de su preferencia</li>
+                <li>En la barra de direcciones, escribir la direccion donde se encuentra el archivo index.html
+                  por ejemplo si la carpeta Equivalencia de Expresiones se encuentra en c: entonces la direccion
+                  seria: c:/Equivalencia%de%Expresiones/index.html</li>
+                <li>La pagina se cargara en su navegador</li>
+              </ol>
+            </p>
+
+            <p>
+                <h3 id="equivalencia">Calcular equivalencia </h3>
+              <ol>
+                <li>Iniciar el programa (via navegador o via archivo)</li>
+                <li>Introducir una expresion en la caja de texto que dice: Introduce la primer expresion regular</li>
+                <li>Introducir una expresion en la caja de texto que dice: Introduce la segunda expresion regular</li>
+                <li>Presionar el boton Calcular Equivalencia</li>
+                <li>Una ventana emergente anunciara si los automatas son equivalentes o no</li>
+                <li>Detalles sobre los automatas generados seran presentados en la parte inferior de la pantalla</li>
+              </ol>
+            </p>
+
+            <p>
+                <h3 id="ejemplos">Ejemplos y restricciones</h3>
+              <ol>
+                <li>Las dos cajas de textos necesitan tener informacion</li>
+                <li>El programa solo analiza expresiones regulares que estan compuestas por simbolos alfabeticos(a-z A-Z), si se usa
+                  una combinacion de minusculas y mayusculas, el programa toma como diferentes cada simbolo, es decir, para el Programa
+                  "a" es diferente de "A"</li>
+                <li>El programa solo analiza y reconoce como tal los siguientes tres operadores: (), + y *</li>
+                <li>Cualquier otro simbolo alfanumerico puede ser usado y se toma como parte del Lenguaje, pero no se recomienda</li>
+                <li>Si una caja de texto tiene informacion y la otra no, por defecto el programa lanzara que no son equivalentes</li>
+                <li>Las dos cajas de textos tienen que tener el mismo alfabeto o de otra manera, el programa lanzara por defecto  que no son equivalentes</li>
+                <li>En esta primera fase del programa, la expresion Epsilon no es aceptada</li>
+                <li>Si alguna expresion tiene problemas de sintaxis, el programa lanzara por defecto  que no son equivalentes</li>
+                <li>Algunos ejemplos de expresiones regulares validas: (a+b), (a+b)*, (a+b*)c+(a+b)</li>
+                <li>Algunos ejemplos de expresiones regulares no recomendadas: ((ab)+*, ab**, a"#$%$, 234</li>
+              </ol>
+            </p>
+
+            <p>
+                <h3 id="documentacion">Ver Documentacion</h3>
+              <ol>
+                <li>Iniciar el programa (via navegador o via archivo)</li>
+                <li>Presionar el boton Ver Documentacion</li>
+                <li>Una nueva pestaña sera desplegada con informacion relevante acerca del proyecto</li>
+                <li>En la nueva pestaña, puede moverse de manera rapida usando el menu de opciones</li>
+                <li>Si se selecciona Justificacion, automaticamente sera enviado a la seccion llamada Justificacion</li>
+                <li>Si se selecciona Descripcion del Proyecto, automaticamente sera enviado a la seccion llamada Descripcion del Proyecto</li>
+                <li>Si se selecciona Manual del Usuario, automaticamente sera enviado a la seccion llamada Manual del Usuario</li>
+              </ol>
+            </p>
+
+
 
         </section>
     </article>
